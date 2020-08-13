@@ -18,7 +18,7 @@
   <script>
   var commanders, baseURL = "https://edhrec-json.s3.amazonaws.com/en/commanders/"
   var allData = []
-  var corsURLS = [ "https://cors-anywhere.herokuapp.com/"]
+  var corsURLS = [ "https://truedhrec.herokuapp.com/"]
   var combos = [
     "w",
 
@@ -100,7 +100,7 @@
     // console.log(tempData)
     count++
     if (count < combos.length) {
-      setTimeout(handleRecursiveFetch, 200)
+      setTimeout(handleRecursiveFetch, 50)
     } else {
       beginDisplay()
     }
@@ -172,7 +172,7 @@
   </script>
   <center>
     <h1>Top Commanders by EDHREC RANK (all time)</h1>
-    
+
   <body>
     <div id="displayArea"></div>
   </body>
