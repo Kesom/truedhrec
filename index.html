@@ -60,7 +60,7 @@ body {
 // Material Design typography
 // https://codepen.io/zavoloklom/pen/IkaFL
 #demo h1 {
-  font-size: 2.4rem;
+  font-size: 3vh;
   line-height: 3.2rem;
   letter-spacing: 0;
   font-weight: 300;
@@ -728,6 +728,32 @@ body {
 
 tr:hover {
   background-color: lightblue;
+  cursor: pointer;
+}
+
+/*
+a {
+  text-decoration: none;
+  color: green;
+}
+
+a:nth-child(odd) {
+  text-decoration: none;
+  color: blue;
+} */
+
+table:nth-child(odd) tr td a {
+  text-decoration: none;
+  color: green;
+}
+
+table:nth-child(even) tr td a {
+  text-decoration: none;
+  color: green;
+}
+
+table > hr,th,tr {
+  padding: 2vh;
 }
 
     </style>
@@ -854,6 +880,7 @@ $(document).ready(function() {
   function init () {
     // fetch("https://edhrec-json.s3.amazonaws.com/en/commanders/u.json").then(res => res.json()).then(handleData)
     displayArea = document.getElementById('displayArea')
+    loading = document.getElementById('loading')
     recursiveFetch()
   }
 
@@ -865,6 +892,7 @@ $(document).ready(function() {
   function recursiveFetch(data = false) { //COUNT MUST BE 0 BEFORE CALLING THIS
     if (data !== false) {
       allData.push( {"name": combos[count], "data": data} )
+      loading.innerText = (allData.length / combos.length) * 100 + "% loaded"
     }
 
     //
@@ -890,6 +918,7 @@ $(document).ready(function() {
     if (count < combos.length) {
       setTimeout(handleRecursiveFetch, 50)
     } else {
+      loading.style.display = "none"
       beginDisplay()
     }
 
@@ -942,8 +971,12 @@ $(document).ready(function() {
       let tempRank = document.createElement('td');
       let tempName = document.createElement('td');
       let tempDecks = document.createElement('td');
+
+      let tempNameLink = document.createElement('a');
+      tempNameLink.href = allData2[i].scryfall_uri
+      tempNameLink.innerText = allData2[i].name;
       tempRank.innerText = i+1;
-      tempName.innerText = allData2[i].name;
+      tempName.appendChild(tempNameLink);
       tempDecks.innerText = allData2[i].deck_count;
       tempRow.appendChild(tempRank);
       tempRow.appendChild(tempName);
@@ -995,6 +1028,7 @@ $(document).ready(function() {
 <center>
   <div class="table-responsive-vertical shadow-z-1">
     <h1>Top Commanders by EDHREC RANK (all time)</h1>
+    <div id="loading">0% loaded</div>
     <div id="displayArea"> </div>
   </div>
   </center>
