@@ -104,8 +104,10 @@
 
 
       //
-      for (let n = 0; n < d[i].data.container.json_dict.cardlists[0].length; n++) {
-        output.push(d[i].data.container.json_dict.cardlists[0][n])
+      console.log(d[i].data.container.json_dict.cardlists[0].cardviews)
+      for (let n = 0; n < d[i].data.container.json_dict.cardlists[0].cardviews.length; n++) {
+        // console.log(d[i].data.container.json_dict.cardlists[0][n], d[i].data.container.json_dict.cardlists[0])
+        output.push(d[i].data.container.json_dict.cardlists[0].cardviews[n])
       }
 
     }
