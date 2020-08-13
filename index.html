@@ -63,7 +63,23 @@
 
     //
 
-    fetch(baseURL +  combos[count] + '.json').then(res => res.json).then(updateData)
+    fetch(baseURL +  combos[count] + '.json', {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "en-US,en;q=0.9",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": document.location.href,
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": null,
+  "method": "GET",
+  "mode": "no-cors",
+  "credentials": "omit"
+}).then(res => res.json).then(updateData)
 
   }
 
@@ -76,7 +92,8 @@
     tempData = data
     count++
 
-    setTimeout(handleRecursiveFetch, 1000)
+    setTimeout(handleRecursiveFetch, 500)
+
   }
 
   function handleData(data) {
