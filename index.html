@@ -18,29 +18,29 @@
 
     "wu",
     "wb",
-    "wr",
-    "wg",
+    "rw",
+    "gw",
     "ub",
     "ur",
-    "ug",
+    "gu",
     "br",
     "bg",
     "rg",
 
     "wub", //esper
-    "wur", //jeskai
-    "wug", //bant
-    "wbr", //mardu
+    "urw", //jeskai
+    "gwu", //bant
+    "rwb", //mardu
     "wbg", //abzan
-    "wrg", //naya
+    "rgw", //naya
     "ubr", //grixis
-    "urg", //temur
-    "ubg", //sultai
+    "gur", //temur
+    "bgu", //sultai
     "brg", //jund
 
-    "wbrg",
-    "wurg",
-    "wubg",
+    "brgw",
+    "rgwu",
+    "gwub",
     "wubr",
     "ubrg",
 
@@ -91,8 +91,10 @@
   function updateData (data) {
     tempData = data
     count++
+    if (count < combos.length) {
+      setTimeout(handleRecursiveFetch, 500)
+    }
 
-    setTimeout(handleRecursiveFetch, 500)
 
   }
 
