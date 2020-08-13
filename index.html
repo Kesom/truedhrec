@@ -4,7 +4,95 @@
     <meta charset="utf-8">
     <title>truedhrec</title>
   </head>
-  <script></script>
+  <script>
+  var commanders, baseURL = "https://edhrec-json.s3.amazonaws.com/en/commanders/"
+  var allData = []
+  var combos = [
+
+    "w",
+    "u",
+    "b",
+    "r",
+    "g",
+    "colorless",
+
+    "wu",
+    "wb",
+    "wr",
+    "wg",
+    "ub",
+    "ur",
+    "ug",
+    "br",
+    "bg",
+    "rg",
+
+    "wub", //esper
+    "wur", //jeskai
+    "wug", //bant
+    "wbr", //mardu
+    "wbg", //abzan
+    "wrg", //naya
+    "ubr", //grixis
+    "urg", //temur
+    "ubg", //sultai
+    "brg", //jund
+
+    "wbrg",
+    "wurg",
+    "wubg",
+    "wubr",
+    "ubrg",
+
+    "wubrg"
+
+  ]
+
+  var count = 0
+  function init () {
+    // fetch("https://edhrec-json.s3.amazonaws.com/en/commanders/u.json").then(res => res.json()).then(handleData)
+
+    recursiveFetch()
+  }
+
+
+  function recursiveFetch(data = false) { //COUNT MUST BE 0 BEFORE CALLING THIS
+    if (data !== false) {
+      allData.push( {"name": combos[count], "data": data} )
+    }
+
+    //
+
+    fetch(baseURL +  combos[count] + '.json').then(res => res.json).then(updateData)
+
+  }
+
+  function handleRecursiveFetch() {
+    recursiveFetch(tempData)
+  }
+
+
+  function updateData (data) {
+    tempData = data
+    count++
+
+    setTimeout(handleRecursiveFetch, 1000)
+  }
+
+  function handleData(data) {
+    console.log(data)
+    commanders = data
+    displayData(commanders)
+  }
+
+
+  function displayData(data) {
+    console.log(data.container.json_dict.cardlists)
+  }
+
+  document.addEventListener("DOMContentLoaded", init)
+
+  </script>
   <body>
 
   </body>
