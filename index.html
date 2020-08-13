@@ -8,6 +8,7 @@
   var commanders, baseURL = "https://edhrec-json.s3.amazonaws.com/en/commanders/"
   var allData = []
   var combos = [
+    "w",
 
     "w",
     "u",
@@ -51,7 +52,7 @@
   var count = 0
   function init () {
     // fetch("https://edhrec-json.s3.amazonaws.com/en/commanders/u.json").then(res => res.json()).then(handleData)
-
+    displayArea = document.getElementById('displayArea')
     recursiveFetch()
   }
 
@@ -77,19 +78,42 @@
 
 
   function updateData (data) {
-    console.log(data)
+    // console.log(data)
     tempData = data
-    console.log(tempData)
+    // console.log(tempData)
     count++
     if (count < combos.length) {
-      setTimeout(handleRecursiveFetch, 500)
+      setTimeout(handleRecursiveFetch, 50)
+    } else {
+      beginDisplay()
     }
 
 
   }
 
+  function beginDisplay () {
+    allData2 = makeReadable(allData)
+    console.log(allData, allData2)
+  }
+
+  function makeReadable(d) {
+    let output = []
+    for (let i = 0; i < d.length; i++) {
+
+
+
+
+      //
+      for (let n = 0; n < d[i].data.container.json_dict.cardlists[0].length; n++) {
+        output.push(d[i].data.container.json_dict.cardlists[0][n])
+      }
+
+    }
+    return output
+  }
+
   function handleData(data) {
-    console.log(data)
+    // console.log(data)
     commanders = data
     displayData(commanders)
   }
@@ -103,6 +127,6 @@
 
   </script>
   <body>
-
+    <div id="displayArea"></div>
   </body>
 </html>
