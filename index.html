@@ -93,7 +93,17 @@
 
   function beginDisplay () {
     allData2 = makeReadable(allData)
-    console.log(allData, allData2)
+    // console.log(allData, allData2)
+
+    // allData2.sort
+
+    allData2.sort(function(a,b) {
+      return b.deck_count - a.deck_count
+    })
+
+    console.log(allData2)
+
+    for (let i = 0; i < allData2.length; i++) {}
   }
 
   function makeReadable(d) {
@@ -104,9 +114,10 @@
 
 
       //
-      console.log(d[i].data.container.json_dict.cardlists[0].cardviews)
+      // console.log(d[i].data.container.json_dict.cardlists[0].cardviews)
       for (let n = 0; n < d[i].data.container.json_dict.cardlists[0].cardviews.length; n++) {
         // console.log(d[i].data.container.json_dict.cardlists[0][n], d[i].data.container.json_dict.cardlists[0])
+        d[i].data.container.json_dict.cardlists[0].cardviews[n].deck_count = parseInt(d[i].data.container.json_dict.cardlists[0].cardviews[n].label.split(" ")[0])
         output.push(d[i].data.container.json_dict.cardlists[0].cardviews[n])
       }
 
