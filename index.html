@@ -45,7 +45,8 @@
     "wubr",
     "ubrg",
 
-    "wubrg"
+    "wubrg",
+    "wubrg",
 
   ]
 
@@ -103,8 +104,22 @@
 
     console.log(allData2)
 
-    for (let i = 0; i < allData2.length; i++) {}
+    allData2 = allData2.filter(function(el) {
+  if (!this[el.name]) {
+    this[el.name] = true;
+    return true;
   }
+  return false;
+}, Object.create(null))
+
+    for (let i = 0; i < allData2.length; i++) {
+      let div = document.createElement('div');
+      div.innerText = "#" + (i+1) + ": " + allData2[i].name + " (" + allData2[i].deck_count + " decks)"
+      displayArea.appendChild(div)
+    }
+  }
+
+
 
   function makeReadable(d) {
     let output = []
