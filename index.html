@@ -756,6 +756,18 @@ table > hr,th,tr {
   padding: 2vh;
 }
 
+
+button {
+  color: green;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1.5vh;
+  padding: 1.5vh;
+  font-size: 2vh;
+
+}
+
     </style>
   </head>
   <script src="jquery.js"></script>
@@ -876,10 +888,31 @@ $(document).ready(function() {
 
   ]
 
+
+  function randomCommander(min = 100, max = 500) {
+
+    if (min === undefined) {min = 100, max = 500}
+
+    // let rthing =
+    // console.log(rthing)
+    // let commander = allData2[rthing]
+    let abcd = Math.floor(Math.random() * (max - min)) + min
+    console.log(abcd)
+    console.log(allData2[abcd])
+    let commander = allData2[abcd];
+    let tempA = document.createElement('a');
+    tempA.href = commander.scryfall_uri
+    tempA.classList = 'random'
+    tempA.innerText = commander.name
+    randomArea.innerHTML = ''
+    randomArea.appendChild(tempA)
+  }
+
   var count = 0
   function init () {
     // fetch("https://edhrec-json.s3.amazonaws.com/en/commanders/u.json").then(res => res.json()).then(handleData)
     displayArea = document.getElementById('displayArea')
+    randomArea = document.getElementById('randomArea')
     loading = document.getElementById('loading')
     recursiveFetch()
   }
@@ -925,6 +958,10 @@ $(document).ready(function() {
 
   }
 
+  function doRandomCommander() {
+    randomCommander()
+  }
+
   function beginDisplay () {
     allData2 = makeReadable(allData)
     // console.log(allData, allData2)
@@ -944,6 +981,13 @@ $(document).ready(function() {
   }
   return false;
 }, Object.create(null))
+
+  let randomButton = document.createElement('button');
+  randomButton.innerText = "Random Commander";
+  randomButton.addEventListener("click", doRandomCommander)
+  displayArea.appendChild(randomButton)
+
+
   let table = document.createElement('table');
   table.id = "table";
   table.classList = "table table-hover table-mc-light-blue"
@@ -1029,7 +1073,8 @@ $(document).ready(function() {
   <div class="table-responsive-vertical shadow-z-1">
     <h1>Top Commanders by EDHREC RANK (all time)</h1>
     <div id="loading">0% loaded</div>
-    <div id="displayArea"> </div>
+    <div id='randomArea'></div>
+    <div id="displayArea"></div>
   </div>
   </center>
     </body>
